@@ -3,21 +3,29 @@ var app = express();
 
 // ----------- Configuration Section ---------------
 
-var ENDPOINT = "forms"
-var OUTPUT = require('./output.json');
-var port = 8888
+/* Rename this if you want to change the name of the API */
+var ENDPOINT = "endpoint"
+
+/* Pointer to json file whose content has to be sent as API response */
+var INPUT_FILE = './output.json'
+
+/* Server listening port */
+var PORT = 8888
 
 // ----------- End of configuration Section ---------------
 
-//ipAddress = 'http://localhost:' + port
+var OUTPUT_JSON = require(INPUT_FILE);
 
 app.get('/' + ENDPOINT, function(req, res){
-  res.send(OUTPUT);
+  console.log("Processing you request ...");
+  res.send(OUTPUT_JSON);
+  //console.log(OUTPUT_JSON);
+  console.log("");
 });
 
-app.listen(port);
+app.listen(PORT);
 
 require('dns').lookup(require('os').hostname(), function (err, add, fam) {
-  var ipAddress = 'http://'+add + ':' + port
+  var ipAddress = 'http://'+add + ':' + PORT
   console.log("The API is waiting for you at " + ipAddress + "/" + ENDPOINT);
 })
