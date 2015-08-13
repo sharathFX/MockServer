@@ -3,23 +3,36 @@ var os = require('os');
 var app = express();
 app.disable('etag')
 
-// ----------- Configuration Section ---------------
+// ----------- Configuration Section for GET Request ---------------
 
-/* Rename this if you want to change the name of the API */
-var ENDPOINT = "endpoint"
+/* Rename this if you want to change the name of the GET_API */
+var GET_ENDPOINT = "endpoint"
 
 /* Pointer to json file whose content has to be sent as API response */
-var INPUT_FILE = './output.json'
+var GET_INPUT_FILE = './get_output.json'
+
+/* What response code you want? */
+var GET_RESPONSE_CODE = 200;
+
+
+// ----------- Configuration Section for POST Request ---------------
+
+/* Rename this if you want to change the name of the POST_API */
+var POST_ENDPOINT = "postendpoint"
+
+/* Pointer to json file whose content has to be sent as API response */
+var POST_INPUT_FILE = './post_output.json'
+
+/* What response code you want? */
+var POST_RESPONSE_CODE = 200;
 
 /* Server listening port */
 var PORT = 8888
 
-/* What response code you want? */
-var RESPONSE_CODE = 200;
-
 // ----------- End of configuration Section ---------------
 
-var OUTPUT_JSON = require(INPUT_FILE);
+var GET_OUTPUT_JSON = require(GET_INPUT_FILE);
+var POST_OUTPUT_JSON = require(POST_INPUT_FILE);
 
 
 var interfaces = os.networkInterfaces();
@@ -34,12 +47,21 @@ for (var k in interfaces) {
 }
 //console.log(addresses);
 
-app.get('/' + ENDPOINT, function(req, res){
-  console.log("Processing you request ...");
-  res.send(RESPONSE_CODE, OUTPUT_JSON);
+app.get('/' + GET_ENDPOINT, function(req, res){
+  console.log("Processing you GET request ...");
+  res.send(GET_RESPONSE_CODE, GET_OUTPUT_JSON);
+  console.log("");
+});
+
+app.post('/' + POST_ENDPOINT, function(req, res){
+  console.log("Processing your POST request ...");
+  res.send(POST_RESPONSE_CODE, POST_OUTPUT_JSON);
   console.log("");
 });
 
 app.listen(PORT);
-console.log("The API is waiting for you at http://"  + addresses[0] + ":" + PORT + "/"+ ENDPOINT);
+console.log("You can access GET request at http://"  + addresses[0] + ":" + PORT + "/"+ GET_ENDPOINT);
+console.log("and")
+console.log("You can access POST request at http://"  + addresses[0] + ":" + PORT + "/"+ POST_ENDPOINT);
+
 

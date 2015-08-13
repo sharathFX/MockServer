@@ -1,0 +1,12 @@
+{
+    "form_details": [
+            {
+                "name": "Retrofit",
+                "link": "http://square.github.io/retrofit/"
+            },
+            {
+                "name": "Esspresso",
+                "link": "http://www.michaelevans.org/blog/2015/08/03/using-espresso-for-easy-ui-testing/?utm_source=Android+Weekly&utm_campaign=8f0cc3ff1f-Android_Weekly_165&utm_medium=email&utm_term=0_4eb677ad19-8f0cc3ff1f-337874565"
+            }
+    ]
+}
